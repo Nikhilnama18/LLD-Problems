@@ -5,7 +5,7 @@ import org.nikhil.models.RateLimitRequest;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-public class RollOverRateLimiter {
+public class RollOverRateLimiter implements IRateLimiter {
     private Integer maxAllowedRequests;
     private Long windowMilliSecond;
 

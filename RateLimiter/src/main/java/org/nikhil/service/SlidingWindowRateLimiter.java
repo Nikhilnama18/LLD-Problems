@@ -6,7 +6,7 @@ import org.nikhil.models.SlidingWindowRequest;
 import java.util.Deque;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class SlidingWindowRateLimiter {
+public class SlidingWindowRateLimiter implements IRateLimiter {
     private final int allowedRequests;
     private final long windowMilliSeconds;
 

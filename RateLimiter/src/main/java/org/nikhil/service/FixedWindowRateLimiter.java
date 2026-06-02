@@ -5,7 +5,7 @@ import org.nikhil.models.RateLimitRequest;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-public class FixedWindowRateLimiter {
+public class FixedWindowRateLimiter implements IRateLimiter {
     private int maxAllowedRequests;
     private long allowedWindowMilliSecond;
 
