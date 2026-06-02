@@ -4,6 +4,7 @@ import org.nikhil.enums.RateLimitStatus;
 import org.nikhil.models.RateLimitRequest;
 import org.nikhil.service.FixedWindowRateLimiter;
 import org.nikhil.service.SlidingWindowRateLimiter;
+import org.nikhil.service.TokenBucketRateLimiter;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -27,7 +28,7 @@ public class Main {
         }
 
         // Sliding Window
-
+//
         System.out.println("******* Sliding window rate limiter *********");
 
         SlidingWindowRateLimiter slidingWindowRateLimiter = new SlidingWindowRateLimiter(10, 10000);
@@ -48,6 +49,24 @@ public class Main {
 
         for (int i=0; i<2; i++){
             RateLimitStatus status = slidingWindowRateLimiter.allowRequest(ip);
+            System.out.println("Req No:" + reqCount++ + " Status: " + status);
+        }
+
+        // Token Bucket
+
+        System.out.println("********** Token bucket rate limiter ********");
+        TokenBucketRateLimiter tokenBucketRateLimiter = new TokenBucketRateLimiter(5, 2000,1);
+
+        reqCount = 0;
+        for(int i=0; i<6; i++){
+            RateLimitStatus status = tokenBucketRateLimiter.allowRequest(ip);
+            System.out.println("Req No:" + reqCount++ + " Status: " + status);
+        }
+
+        Thread.sleep(4500);
+
+        for(int i=0; i<3; i++){
+            RateLimitStatus status = tokenBucketRateLimiter.allowRequest(ip);
             System.out.println("Req No:" + reqCount++ + " Status: " + status);
         }
     }
